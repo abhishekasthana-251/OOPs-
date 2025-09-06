@@ -1,0 +1,85 @@
+class Atm:
+    #static/Class Variable ->which is same for all the object ,and it is initialize above the constructor ,
+    __counter=1
+    #constructor ->is a special method inside the class that is used to  initialize objects ,is automatically called when you create an object of the class
+    def __init__(self):
+        #instance variable-> are the variable which is different for different object
+        
+        self.__pin=""
+        self.__balance=0
+        self.sno =Atm.__counter #it a static variable so that why it is called like this 
+        Atm.counter=Atm.__counter +1
+        
+
+        self.__menu()
+        @staticmethod #->to show it is static methods
+    def get_counter(): #when we are dealing with the static variable then we do no send Self in the because the static is class variable it is not a Object variable 
+        return Atm.___counter
+    @staticmethod #->to show it is a static methods 
+    def set_counter(new):
+        if(type(new)==int):
+            Atm.__counter=new
+        else:
+            print("Not Allowed")
+
+    def get_pin(self):
+        return self.__pin
+
+    def set_pin(self,new_pin):
+        if type(new_pin)== str:
+            self.__pin=new_pin
+            print("pin changed ")
+        else:
+            print("not allowed")
+    def __menu(self):
+        user_input=input(""" 
+                        Hello, How would you like to proceed?
+                        1.enter 1 to create pin 
+                        2.Enter 2 to deposit
+                        3.enter 3 to withdraw
+                        4.enter 4 to check balance
+                        5.enter 5 to exit
+        """)
+        if user_input=='1':
+            self.create_pin()
+        elif user_input=="2":
+            self.deposit()
+        elif user_input=="3":
+            self.withdraw()
+        elif user_input=="4":
+            self.check_balance()
+        else:
+            print("bye")
+
+    def create_pin(self):
+        self.__pin =input("Enter your pin")
+        print("Pin set successfully")
+    
+    def deposit(self):
+        temp=input("Enter your pin")
+        if temp == self.__pin:
+            amount=int(input("enter the amount"))
+            self.__balance=self.__balance+amount
+            print("deposite successful")
+        else:
+            print("invalid pin")
+    
+    def withdraw(self):
+        temp=input("enter your pin")
+        if temp== self.__pin:
+            amount=int(input("enter the amount"))
+            if amount<self.__balance:
+                self.__balance= self.__balance-amount
+                print("operation successful")
+                print("remaining balance in you account is " )
+                print(self.__balance)
+    
+    def check_balance(self):
+        temp= input("enter your pin")
+        if temp == self.__pin:
+            print(self.__balance)
+
+        else:
+            print("invalid pin")
+
+            
